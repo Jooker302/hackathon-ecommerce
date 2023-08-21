@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react'
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCart } from '@fortawesome/free-brands-svg-icons';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +16,13 @@ const Header = () => {
     return(
       <nav className="bg-white p-4 flex justify-between items-center">
       <div className="flex items-center">
-        <img src="/logo.png" alt="Queen's Store" className="h-8 mr-4" />
+        <Image
+        src="/main.png"
+        className="mr-4 rounded-2xl"
+        width={100}
+        height={100} 
+        alt="Queen's Store"/>
+        {/* <img src="/logo.png" alt="Queen's Store" className="h-8 mr-4" /> */}
         <ul className="hidden md:flex space-x-4">
           <li><a href="#" className="text-gray-800">Female</a></li>
           <li><a href="#" className="text-gray-800">Male</a></li>
