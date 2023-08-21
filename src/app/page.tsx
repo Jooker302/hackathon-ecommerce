@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Intro from '@/components/Intro'
+import Promotions from '@/components/Promotions'
 import Image from 'next/image'
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Header/>
       <Intro/>
+      <Promotions/>
     </>
   )
 }
