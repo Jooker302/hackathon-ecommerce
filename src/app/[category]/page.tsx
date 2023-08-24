@@ -11,7 +11,7 @@ interface Product {
 }
 
 export const getProductData = async () => {
-    const res = await client.fetch(`*[_type=="product"]{
+    const res = await client.fetch<Product[]>(`*[_type=="product"]{
         name,
         price,
         image,
