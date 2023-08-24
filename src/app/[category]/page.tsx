@@ -10,8 +10,8 @@ interface Product {
     _id: string;
 }
 
-export const getProductData = async (): Promise<Product[]> => {
-    const res = await client.fetch<Product[]>(`*[_type=="product"]{
+export const getProductData = async () => {
+    const res = await client.fetch(`*[_type=="product"]{
         name,
         price,
         image,
