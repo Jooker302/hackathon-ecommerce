@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { client } from '@/lib/sanityClient';
 import Header from '@/components/Header';
