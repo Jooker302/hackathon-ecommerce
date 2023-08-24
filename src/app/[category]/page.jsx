@@ -2,16 +2,16 @@ import { client } from "@/lib/sanityClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-interface Product {
-    name: string;
-    price: number;
-    image: string;
-    category: string;
-    _id: string;
-}
+// Product {
+//     name;
+//     price;
+//     image;
+//     category;
+//     _id;
+// }
 
 export const getProductData = async () => {
-    const res = await client.fetch<Product[]>(`*[_type=="product"]{
+    const res = await client.fetch(`*[_type=="product"]{
         name,
         price,
         image,
@@ -21,13 +21,8 @@ export const getProductData = async () => {
     return res;
 };
 
-interface ProductProps {
-    params: {
-        category: string;
-    };
-}
 
-const Product = async ({ params }: { params: { category: string } }) => {
+const Product = async ({ params }) => {
     const { category } = params;
 
     const fetchData = async () => {
