@@ -34,11 +34,11 @@ const Header = () => {
         </ul>
       </div>
       <div className="hidden md:flex items-center space-x-4">
-        <input
+        {/* <input
           type="text"
           className="rounded-xl border border-gray-300 px-3 py-1 focus:outline-none focus:border-blue-500"
           placeholder="Search"
-        />
+        /> */}
         {/* <a href="#" className="text-gray-800">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,10 +88,10 @@ const Header = () => {
           }`}
         >
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-800 block">Female</a></li>
-            <li><a href="#" className="text-gray-800 block">Male</a></li>
-            <li><a href="#" className="text-gray-800 block">Kids</a></li>
-            <li><a href="#" className="text-gray-800 block">All Products</a></li>
+            <li><Link href="/female" className="text-gray-800 block">Female</Link></li>
+            <li><Link href="/male" className="text-gray-800 block">Male</Link></li>
+            <li><Link href="/kids" className="text-gray-800 block">Kids</Link></li>
+            <li><Link href="/all" className="text-gray-800 block">All Products</Link></li>
           </ul>
         </div>
       </div>
