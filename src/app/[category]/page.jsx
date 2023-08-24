@@ -10,20 +10,22 @@ import Footer from "@/components/Footer";
 //     _id;
 // }
 
-export const getProductData = async () => {
-    const res = await client.fetch(`*[_type=="product"]{
-        name,
-        price,
-        image,
-        category,
-        _id
-    }`);
-    return res;
-};
+
 
 
 const Product = async ({ params }) => {
     const { category } = params;
+
+    const getProductData = async () => {
+        const res = await client.fetch(`*[_type=="product"]{
+            name,
+            price,
+            image,
+            category,
+            _id
+        }`);
+        return res;
+    };
 
     const fetchData = async () => {
         const data = await getProductData(); 
