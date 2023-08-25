@@ -2,20 +2,45 @@
 import React, { useState, useEffect } from 'react';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import toast, { Toaster } from 'react-hot-toast';
+// import { error } from 'console';
+
+
 
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
 
-  // fetchCart()
-  // setCartItems()
+  const RemoveCart = ( item ) => {
+    console.log(item)
+    fetch(`/api/cart/${item.id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          setCartItems(prevCartItems => prevCartItems.filter(cartItem => cartItem.id !== item.id));
+          toast.success('Deleted Successfully');
+          // Perform any other actions or updates needed
+        } else {
+          return response.json().then(errorData => {
+            toast.error(`Error: ${errorData.message}`);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting item:', error);
+        toast.error('An error occurred while deleting the item.');
+      });
+  };
+  
+  
   useEffect(() => {
-    // Fetch data from your API
+    
     fetch('/api/cart')
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          console.log("test")
+          // console.log("test")
           setCartItems(data.data);
         }
       })
@@ -42,11 +67,22 @@ export default function Cart() {
       <tbody>
         {cartItems.map((item, index) => (
           <tr key={item.id} className="">
-            <td className="py-2 px-4"><img src={item.image} alt={item.name} className=" h-auto w-24" /> </td>
-            <td className="py-2 px-4">{item.name}</td>
-            <td className="py-2 px-4">{item.category}</td>
-            <td className="py-2 px-4">${item.price}</td>
-            <td className="py-2 px-4"><button className='px-2 py-3 text-white bg-red-500 hover:bg-red-700 rounded-3xl'>Remove</button></td>
+            <td className="py-2 px-4">
+              <img src={item.image} alt={item.name} className=" h-auto w-24" /> 
+              </td>
+            <td className="py-2 px-4">
+              {item.name}
+              </td>
+            <td className="py-2 px-4">
+              {item.category}
+            </td>
+            <td className="py-2 px-4">
+              ${item.price}
+              </td>
+            <td className="py-2 px-4">
+              <button className={`px-2 py-3 text-white bg-red-500 hover:bg-red-700 rounded-3xl`} onClick={() => RemoveCart(item)}>Remove</button>
+
+</td>
           </tr>
         ))}
         
@@ -56,6 +92,7 @@ export default function Cart() {
           <button className='p-3 bg-green-500 text-white hover:bg-green-800 rounded-xl'>Checkout</button>
         </div>
   </main>
+  <Toaster/>
   <Footer />
 </>
 

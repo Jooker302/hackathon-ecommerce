@@ -8,7 +8,7 @@ export const GET = async (request: NextRequest) => {
   try {
     await sql`CREATE TABLE IF NOT EXISTS cart(id serial, user_id varchar(255), product_id varchar(255), name varchar(255), category varchar(255), price varchar(255), image varchar(255))`;
     const res = await db.select().from(cartTable);
-    console.log(res);
+    // console.log(res);
     return NextResponse.json({
       success: "Record Fetched successfully",
       data: res,
@@ -28,7 +28,7 @@ export const POST = async (request: NextRequest) => {
   if (!user_id) {
     setCookies.set("user_id", uid);
   }
-
+  // console.log(req)
   try {
     if (
       req.user_id ||
