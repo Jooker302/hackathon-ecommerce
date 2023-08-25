@@ -4,12 +4,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import toast, { Toaster } from 'react-hot-toast';
 // import { error } from 'console';
+import StripeCheckout from '@/components/StripeCheckout';
 
 
 
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const Checkout = () => {
+    console.log(totalPrice);
+  }
 
   const RemoveCart = ( item ) => {
     console.log(item)
@@ -42,6 +48,8 @@ export default function Cart() {
         if (data.success) {
           // console.log("test")
           setCartItems(data.data);
+          const totalPrice = data.data.reduce((total, item) => total + Number(item.price), 0);
+          setTotalPrice(totalPrice);
         }
       })
       .catch(error => {
@@ -89,7 +97,8 @@ export default function Cart() {
       </tbody>
     </table>
     <div className='flex justify-center'>
-          <button className='p-3 bg-green-500 text-white hover:bg-green-800 rounded-xl'>Checkout</button>
+          <button className='p-3 bg-green-500 text-white hover:bg-green-800 rounded-xl' onClick={() => Checkout()}>Checkout</button>
+          <StripeCheckout price={totalPrice}/>
         </div>
   </main>
   <Toaster/>
