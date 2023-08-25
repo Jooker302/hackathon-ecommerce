@@ -19,7 +19,6 @@ export const cartTable = pgTable("cart", {
   image: varchar("image", { length: 255 }).notNull(),
   category: varchar("category", { length: 255 }).notNull(),
   price: varchar("price", { length: 255 }).notNull(),
-  total: varchar("total", { length: 255 }).notNull(),
 });
 
 export type CartType = InferModel<typeof cartTable>

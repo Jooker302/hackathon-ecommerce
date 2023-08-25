@@ -1,6 +1,9 @@
+
 import { client } from "@/lib/sanityClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AddToCartButton from "@/components/AddtoCart";
+import toast, { Toaster } from 'react-hot-toast';
 
 // Product {
 //     name;
@@ -32,12 +35,14 @@ const Product = async ({ params }) => {
     } else {
       filteredData = data;
     }
-    // console.log(data)
+    // console.log(filteredData)
     return filteredData;
   };
 
   // const renderProducts = async () => {
   const filteredProducts = await fetchData();
+
+ 
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -62,14 +67,14 @@ const Product = async ({ params }) => {
                 Category: {product.category}
               </p>
               <p className="text-gray-500 mb-2">Price: RS{product.price}</p>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                Add to Cart
-              </button>
+              
+              <AddToCartButton product={product}/>
             </div>
           ))}
         </div>
       </div>
       <Footer />
+      <Toaster />
     </div>
   );
   // };

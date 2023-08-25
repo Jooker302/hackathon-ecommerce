@@ -71,7 +71,7 @@ const Header = () => {
             />
           </svg>
         </a> */}
-        <a className="m-2" href="https://t.me/oppenheimerSigma"><FontAwesomeIcon icon={faCartShopping} size="lg" className='h-4 w-4 text-black' /></a>
+        <Link className="m-2" href="/cart"><FontAwesomeIcon icon={faCartShopping} size="lg" className='h-4 w-4 text-black' /></Link>
       </div>
       <div className="md:hidden">
         <button
