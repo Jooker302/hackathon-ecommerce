@@ -21,10 +21,13 @@ export const POST = async (request: NextRequest) => {
           {
               price_data: {
                 currency: 'usd',
-                
+                product_data: {
+                  name: 'Queen\'s Store',
+                  
+              },
                   unit_amount: req.price*100,
               },
-              
+              quantity: 1
           },
       ],
         success_url: `${request.headers.get("origin")}/cart`,

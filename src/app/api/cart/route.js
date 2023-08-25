@@ -4,14 +4,26 @@ import { v4 as uuid } from "uuid";
 import { cartTable, db } from '@/lib/drizzle'
 import { sql } from "@vercel/postgres";
 
-export const GET = async (request: NextRequest) => {
+export const GET = async (request) => {
   try {
+    const uid = uuid();
+  const user_id = cookies().get("user_id");
+  const setCookies = cookies();
+  if (!user_id) {
+    setCookies.set("user_id", uid);
+  }
     await sql`CREATE TABLE IF NOT EXISTS cart(id serial, user_id varchar(255), product_id varchar(255), name varchar(255), category varchar(255), price varchar(255), image varchar(255))`;
-    const res = await db.select().from(cartTable);
+    const res = await db.select().from(cartTable)
+    // res.filter
+    // console.log(user_id)
+    // console.log(cookies().get("user_id"))
+    // console.log(filteredResults);
+    const filteredResults = res.filter(item => item.user_id === user_id.value);
+    // console.log(filteredResults);
     // console.log(res);
     return NextResponse.json({
       success: "Record Fetched successfully",
-      data: res,
+      data: filteredResults,
     });
   } catch (error) {
     console.log(error);
@@ -19,7 +31,7 @@ export const GET = async (request: NextRequest) => {
   }
 };
 
-export const POST = async (request: NextRequest) => {
+export const POST = async (request) => {
   const req = await request.json();
     await sql`CREATE TABLE IF NOT EXISTS cart(id serial, user_id varchar(255), product_id varchar(255), name varchar(255), category varchar(255), price varchar(255), image varchar(255))`;
   const uid = uuid();
@@ -42,7 +54,7 @@ export const POST = async (request: NextRequest) => {
       const res = await db
         .insert(cartTable)
         .values({
-          user_id: cookies().get("user_id")?.value as string,
+          user_id: cookies().get("user_id")?.value,
           product_id: req._id,
           name: req.name,
           image: req.image,
@@ -62,7 +74,7 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-export const DELETE= async (req: NextRequest)=>{
+export const DELETE= async (req)=>{
   try {
     const res= await db.delete(cartTable).execute();
     return NextResponse.json({

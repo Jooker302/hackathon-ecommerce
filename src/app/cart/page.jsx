@@ -25,6 +25,8 @@ export default function Cart() {
       .then(response => {
         if (response.ok) {
           setCartItems(prevCartItems => prevCartItems.filter(cartItem => cartItem.id !== item.id));
+          setTotalPrice(prevTotalPrice => prevTotalPrice - Number(item.price));
+          
           toast.success('Deleted Successfully');
           // Perform any other actions or updates needed
         } else {
@@ -41,6 +43,7 @@ export default function Cart() {
   
   
   useEffect(() => {
+    
     
     fetch('/api/cart')
       .then(response => response.json())
@@ -61,7 +64,7 @@ export default function Cart() {
     <>
   <Header />
   <main className="p-4">
-    <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+    <h1 className="text-2xl font-bold mb-4">Your Cart Total ($ {totalPrice})</h1>
     <table className="w-full border">
       <thead>
         <tr className="bg-gray-200">
@@ -97,7 +100,7 @@ export default function Cart() {
       </tbody>
     </table>
     <div className='flex justify-center'>
-          <button className='p-3 bg-green-500 text-white hover:bg-green-800 rounded-xl' onClick={() => Checkout()}>Checkout</button>
+          {/* <button className='p-3 bg-green-500 text-white hover:bg-green-800 rounded-xl' onClick={() => Checkout()}>Checkout</button> */}
           <StripeCheckout price={totalPrice}/>
         </div>
   </main>

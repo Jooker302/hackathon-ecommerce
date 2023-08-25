@@ -66,7 +66,7 @@ const Product = async ({ params }) => {
               <p className="text-gray-500 mb-1 capitalize">
                 Category: {product.category}
               </p>
-              <p className="text-gray-500 mb-2">Price: RS{product.price}</p>
+              <p className="text-gray-500 mb-2">Price: ${product.price}</p>
               
               <AddToCartButton product={product}/>
             </div>
